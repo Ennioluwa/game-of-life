@@ -136,6 +136,7 @@ const HomeGrid = () => {
                   let newGrid = JSON.parse(JSON.stringify(grid));
                   newGrid[i][j] = grid[i][j] ? 0 : 1;
                   setGrid(newGrid);
+                  setCount(0);
                 }}
                 disabled={running}
                 className={` w-8 h-8 cursor-pointer border border-blue-100 ${

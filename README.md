@@ -32,3 +32,6 @@ This array is called the positions.
 We map over the grid's rows and columns and calculate the number of neighbors each cell has.
 If the number of neighbors is less than 2 or greater than 3, the cell is given a value of 0 as it has been killed by underpopulation or overpopulation.
 If the number of neighbors is equal to 3, the cell is given a value of 1.
+Deployed to:
+
+https://game-of-life-nine-alpha.vercel.app/
