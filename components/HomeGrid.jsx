@@ -1,26 +1,31 @@
 import { useCallback, useEffect, useState } from "react";
 import useInterval from "./useInterval";
-import { getCells, positions } from "./utils";
+import { columnNumber, getCells, positions, rowNumber } from "./utils";
 const HomeGrid = () => {
   const [grid, setGrid] = useState(() => {
     return getCells();
   });
-  const [permanent, setPermanent] = useState(false);
+  const [permanent, setPermanent] = useState(true);
   const [running, setRunning] = useState(false);
   const [intervalNo, setIntervalNo] = useState(200);
   const [count, setCount] = useState(0);
 
   const runSimulation = useCallback((grid) => {
     let gridCopy = JSON.parse(JSON.stringify(grid));
-    for (let i = 0; i < 25; i++) {
-      for (let j = 0; j < 25; j++) {
+    for (let i = 0; i < rowNumber; i++) {
+      for (let j = 0; j < columnNumber; j++) {
         let neighbors = 0;
 
         positions.forEach(([x, y]) => {
           const newI = i + x;
           const newJ = j + y;
 
-          if (newI >= 0 && newI < 25 && newJ >= 0 && newJ < 25) {
+          if (
+            newI >= 0 &&
+            newI < rowNumber &&
+            newJ >= 0 &&
+            newJ < columnNumber
+          ) {
             neighbors += grid[newI][newJ];
           }
         });
@@ -86,12 +91,14 @@ const HomeGrid = () => {
           {!running ? "Start" : "Stop"}
         </button>
         <button
+          disabled={running}
           onClick={handleRandom}
           className=" bg-white font-semibold hover:bg-blue-50 px-4 py-2 rounded text-blue-600 cursor-pointer"
         >
           Random
         </button>
         <button
+          disabled={running}
           onClick={handleReset}
           className=" bg-white font-semibold hover:bg-blue-50 px-4 py-2 rounded text-blue-600 cursor-pointer"
         >
@@ -109,12 +116,12 @@ const HomeGrid = () => {
             className=" text-blue-600 font-semibold focus:ring focus:ring-blue-300 w-20 p-1 rounded bg-white focus:outline-none border border-blue-300"
             type="number"
             value={intervalNo}
-            onChange={() => setIntervalNo(200)}
+            onChange={(e) => setIntervalNo(e.target.value)}
             step={50}
             min={0}
           />
         </div>
-        <div className=" font-semibold text-blue-500 w-20">
+        <div className=" font-semibold text-blue-500 shrink-0 w-24">
           <span>Steps: </span>
           <span>{count}</span>
         </div>
