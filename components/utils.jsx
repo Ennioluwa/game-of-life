@@ -1,5 +1,4 @@
-export const rowNumber = 30;
-export const columnNumber = 30;
+import { useSelector, useDispatch } from "react-redux";
 
 export const positions = [
   [0, 1],
@@ -12,10 +11,10 @@ export const positions = [
   [-1, 0],
 ];
 
-export const getCells = () => {
+export const getCells = (rowNo, columnNo) => {
   const rows = [];
-  for (let i = 0; i < rowNumber; i++) {
-    rows.push(Array.from(Array(columnNumber), () => 0)); // returns a live cell 70% of the time
+  for (let i = 0; i < rowNo; i++) {
+    rows.push(Array.from(Array(columnNo), () => 0)); // returns a live cell 70% of the time
   }
   return rows;
 };

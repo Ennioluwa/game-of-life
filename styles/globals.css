@@ -10,3 +10,6 @@
     gap: 5px;
 
 }
+.gridCell {
+    height: calc((100vh ) /20);
+}
